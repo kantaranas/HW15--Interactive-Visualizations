@@ -161,7 +161,7 @@ Update the chart whenever a new sample is selected
 
 ## Step 2 - Heroku 
 
-Deploy your Flask app to Heroku.
+Deploy your Flask app to Heroku. [https://biosamplermj.herokuapp.com/](https://biosamplermj.herokuapp.com/)
 
 Link to my Heroko app: 
 
