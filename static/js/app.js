@@ -84,8 +84,8 @@ function buildCharts(biosample) {
 
     var pieLayout = {
         title: "Pie Chart: Top 10 Bacteria Samples",
-        height: 500,
-        width: 500
+        height: 450,
+        width: 450
     };
 
     // display the pie chart
@@ -116,7 +116,7 @@ function buildCharts(biosample) {
 
     var gaugedata = [{ type: 'scatter',
       x: [0], y:[0],
-        marker: {size: 28, color:'850000'},
+        marker: {size: 28, color:'192B4C'},
         showlegend: true,
         name: 'Frequency',
         text: level,
@@ -128,15 +128,15 @@ function buildCharts(biosample) {
       textposition:'inside',
       marker: {
         colors:[
-          'rgba(14, 127, 0, .5)',
-          'rgba(14, 127, 0, .5)',
-          'rgba(14, 127, 0, .5)',
-          'rgba(14, 127, 0, .5)', 
-          'rgba(110, 154, 22, .5)',
-          'rgba(170, 202, 42, .5)', 
-          'rgba(202, 209, 95, .5)',
-          'rgba(210, 206, 145, .5)', 
-          'rgba(232, 226, 202, .5)',
+          'rgba(0, 90, 255, .5)',
+          'rgba(51, 123, 255, .5)',
+          'rgba(76, 139, 255, .5)',
+          'rgba(102, 156, 255, .5)', 
+          'rgba(127, 172, 255, .5)',
+          'rgba(153, 189, 255, .5)', 
+          'rgba(178, 205, 255, .5)',
+          'rgba(204, 222, 255, .5)', 
+          'rgba(229, 238, 255, .5)',
           'rgba(255, 255, 255, 0)']},
       labels: ['8-9 scrubs', '7-8 scrubs', '6-7 scrubs', '5-6 scrubs','4-5 scrubs', '3-4 scrubs', '2-3 scrubs', '1-2 scrubs', '0-1 scrubs', ''],
       hoverinfo: 'label',
@@ -149,14 +149,14 @@ function buildCharts(biosample) {
       shapes:[{
           type: 'path',
           path: path,
-          fillcolor: '850000',
+          fillcolor: '192B4C',
           line: {
-            color: '850000'
+            color: '192B4C'
           }
         }],
       title: '<b>Belly Button Weekly Washing Frequency</b><br>Scrubs per Week',
-      height: 500,
-      width: 500,
+      height: 450,
+      width: 450,
       xaxis: {zeroline:false, showticklabels:false,
                 showgrid: false, range: [-1, 1]},
       yaxis: {zeroline:false, showticklabels:false,
