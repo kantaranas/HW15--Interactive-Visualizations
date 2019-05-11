@@ -12,23 +12,25 @@ Create a PIE chart that uses data from your samples route (/samples/<sample>) to
 ```js
  // PIE CHART
     var pieChart = [{
-        values : bacteriaData["sample_values"].slice(0, 10),
-        labels : bacteriaData["otu_ids"].slice(0, 10),
-        hovertext : bacteriaData["otu_labels"].slice(0, 10),
+        values : bacteriaData['sample_values'].slice(0, 10),
+        labels : bacteriaData['otu_ids'].slice(0, 10),
+        hovertext : bacteriaData['otu_labels'].slice(0, 10),
         hoverinfo: 'hovertext',
-        type: "pie"
+        type: 'pie'
     }];
 
     var pieLayout = {
-        title: "Pie Chart: Top 10 Bacteria Samples",
-        height: 450,
-        width: 450
+        title: `<b>Top Ten Measurements for Sample ${sample}</b>`,
+        // height: 450,
+        // width: 450
     };
 
     // display the pie chart
-    Plotly.plot("pie", pieChart, pieLayout);
+    Plotly.newPlot('pie', pieChart, pieLayout);
+    })
+  };
 
- //END OF PIE CHART
+//END OF PIE CHART
     
 ```
 
@@ -41,14 +43,14 @@ Create a Bubble Chart that uses data from your samples route (/samples/<sample>)
   // DATA TRACE
 
     var bubbletrace = {
-      x: bacteriaData["otu_ids"],
-      y: bacteriaData["sample_values"],
-      text: bacteriaData["otu_labels"],
+      x: bacteriaData['otu_ids'],
+      y: bacteriaData['sample_values'],
+      text: bacteriaData['otu_labels'],
       mode: 'markers',
       opacity: 0.5,
       marker: {
-        color: bacteriaData["otu_ids"],
-        size: bacteriaData["sample_values"]
+        color: bacteriaData['otu_ids'],
+        size: bacteriaData['sample_values']
       },
       type: 'scatter'
     };
@@ -59,16 +61,16 @@ Create a Bubble Chart that uses data from your samples route (/samples/<sample>)
     var bubbledata = [bubbletrace];
 
     var bubblelayout = {
-      title: "Bubble Chart: Bacteria Samples",
-      hovermode: "closest",
+      title: `Bubble Chart: For Bacteria Sample ${sample}`,
+      hovermode: 'closest',
       autosize: true,
-      xaxis: { title: "OTU ID"},
+      xaxis: { title: 'OTU ID'},
     };
 
     //Display the bubble chart
-    Plotly.newPlot("bubble", bubbledata, bubblelayout);
+    Plotly.newPlot('bubble', bubbledata, bubblelayout);
 
-    // END OF BUBBLE CHART
+  // END OF BUBBLE CHART
 
 ```
 
@@ -81,57 +83,66 @@ Update the chart whenever a new sample is selected
 ```js
 //GAUGE PLOT
 
-    // Enter a speed between 0 and 180
-    var level = (biosample * (180/9));
+function buildGauge(wfreq) {
 
+    // Enter the washing frequency between 0 and 180
+    var wFraction = parseFloat(wfreq/9);
+    
     // Trig to calc meter point
-    var degrees = 180 - level,
-        radius = .5;
+    var level = 180 * wFraction;
+    var degrees = 180 - level;
+    var radius = .5;
     var radians = degrees * Math.PI / 180;
     var x = radius * Math.cos(radians);
     var y = radius * Math.sin(radians);
 
     // Path: may have to change to create a better triangle
     var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
-        pathX = String(x),
-        space = ' ',
-        pathY = String(y),
-        pathEnd = ' Z';
+    pathX = String(x),
+    space = ' ',
+    pathY = String(y),
+    pathEnd = ' Z';
     var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
-    var gaugedata = [{ type: 'scatter',
-      x: [0], y:[0],
-        marker: {size: 28, color:'192B4C'},
+    var data = [
+      {
+        type: 'scatter',
+        x: [0],
+        y: [0],
+        marker: { size: 28, color: '192B4C' },
         showlegend: true,
         name: 'Frequency',
         text: level,
-        hoverinfo: 'text+name'},
-      { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
-      rotation: 90,
-      text: ['8-9', '7-8', '6-7', '5-6','4-5', '3-4', '2-3', '1-2', '0-1', ''],
-      textinfo: 'text',
-      textposition:'inside',
-      marker: {
-        colors:[
-          'rgba(0, 90, 255, .5)',
-          'rgba(51, 123, 255, .5)',
-          'rgba(76, 139, 255, .5)',
-          'rgba(102, 156, 255, .5)', 
-          'rgba(127, 172, 255, .5)',
-          'rgba(153, 189, 255, .5)', 
-          'rgba(178, 205, 255, .5)',
-          'rgba(204, 222, 255, .5)', 
-          'rgba(229, 238, 255, .5)',
-          'rgba(255, 255, 255, 0)']},
-      labels: ['8-9 scrubs', '7-8 scrubs', '6-7 scrubs', '5-6 scrubs','4-5 scrubs', '3-4 scrubs', '2-3 scrubs', '1-2 scrubs', '0-1 scrubs', ''],
-      hoverinfo: 'label',
-      hole: .5,
-      type: 'pie',
-      showlegend: false
-    }];
+        hoverinfo: 'text+name'
+      },
+      {
+        values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+        rotation: 90,
+        text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+        textinfo: 'text',
+        textposition: 'inside',
+        marker: {
+          colors:[
+            'rgba(0, 90, 255, .5)',
+            'rgba(51, 123, 255, .5)',
+            'rgba(76, 139, 255, .5)',
+            'rgba(102, 156, 255, .5)', 
+            'rgba(127, 172, 255, .5)',
+            'rgba(153, 189, 255, .5)', 
+            'rgba(178, 205, 255, .5)',
+            'rgba(204, 222, 255, .5)', 
+            'rgba(229, 238, 255, .5)',
+            'rgba(255, 255, 255, 0)']},
+        labels: ['8-9 scrubs', '7-8 scrubs', '6-7 scrubs', '5-6 scrubs','4-5 scrubs', '3-4 scrubs', '2-3 scrubs', '1-2 scrubs', '0-1 scrubs', ''],
+        hoverinfo: 'label',
+        hole: .5,
+        type: 'pie',
+        showlegend: false
+      }
+    ];
 
-    var gaugelayout = {
-      shapes:[{
+    var layout = {
+      shapes: [{
           type: 'path',
           path: path,
           fillcolor: '192B4C',
@@ -139,18 +150,27 @@ Update the chart whenever a new sample is selected
             color: '192B4C'
           }
         }],
-      title: '<b>Belly Button Weekly Washing Frequency</b><br>Scrubs per Week',
-      height: 450,
-      width: 450,
-      xaxis: {zeroline:false, showticklabels:false,
-                showgrid: false, range: [-1, 1]},
-      yaxis: {zeroline:false, showticklabels:false,
-                showgrid: false, range: [-1, 1]}
+      title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
+      // height: 450,
+      // width: 450,
+      xaxis: {
+        zeroline: false,
+        showticklabels: false,
+        showgrid: false,
+        range: [-1, 1]
+      },
+      yaxis: {
+        zeroline: false,
+        showticklabels: false,
+        showgrid: false,
+        range: [-1, 1]
+      }
     };
 
-    Plotly.newPlot('gauge', gaugedata, gaugelayout);
-  });
-  }
+    Plotly.newPlot('gauge', data, layout);
+
+}
+  
 // END GAUGE PLOT
 
 ```
@@ -159,14 +179,7 @@ Update the chart whenever a new sample is selected
 
 
 
-## Step 2 - Heroku 
-
-Deploy your Flask app to Heroku. [https://biosamplermj.herokuapp.com/](https://biosamplermj.herokuapp.com/)
-
-Link to my Heroko app: 
+## HOMEPAGE
 
 ![Dashboard](static/images/dashboard.png)
 
-```python
-
-```
