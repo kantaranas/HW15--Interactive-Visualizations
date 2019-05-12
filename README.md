@@ -5,6 +5,9 @@
 
 Build an interactive dashboard to explore the Belly Button Biodiversity DataSet.
 
+[Heroku app with interactive dashboard]: https://herokubelly.herokuapp.com/
+
+-----------------------------------------------------------------------------------------------------------------------
 ## Step 1 - Plotly.js 
 
 Create a PIE chart that uses data from your samples route (/samples/<sample>) to display the top 10 samples.
