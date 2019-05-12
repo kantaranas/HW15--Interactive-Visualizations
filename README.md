@@ -5,12 +5,12 @@
 
 Build an interactive dashboard to explore the Belly Button Biodiversity DataSet.
 
-[Heroku app with interactive dashboard]: https://herokubelly.herokuapp.com/
+Visit my [Heroku app with interactive dashboard](https://herokubelly.herokuapp.com/)
 
 -----------------------------------------------------------------------------------------------------------------------
 ## Step 1 - Plotly.js 
 
-Create a PIE chart that uses data from your samples route (/samples/<sample>) to display the top 10 samples.
+Create a PIE chart that uses data from your samples route ```(/samples/<sample>)``` to display the top 10 samples.
 
 ```js
  // PIE CHART
@@ -79,7 +79,7 @@ Create a Bubble Chart that uses data from your samples route (/samples/<sample>)
 
 ![Bubble Plot](static/images/bubbleplot.png)
 
-Adapt the Gauge Chart to plot the Weekly Washing Frequency obtained from the route /wfreq/<sample>
+Adapt the Gauge Chart to plot the Weekly Washing Frequency obtained from the route ```/wfreq/<sample>```
 
 Update the chart whenever a new sample is selected
 
